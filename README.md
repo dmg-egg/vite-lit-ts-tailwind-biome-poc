@@ -1,12 +1,14 @@
 # Setting up this project from scratch
 
-## 1. Install Vite using the `lit-ts` template, along with Tailwind.
+## 1. Install Vite using the `lit-ts` template, along with Tailwind and Biome.
 ```sh
 pnpm create vite modal-component --template lit-ts
 cd modal-component
 pnpm install
-pnpm approve-builds  # Approve esbuild
 pnpm add tailwindcss @tailwindcss/vite
+pnpm add --save-dev --save-exact @biomejs/biome
+pnpm approve-builds  # Approve esbuild and @biomejs/biome
+pnpm biome init --jsonc  # This creates the Biome config
 ```
 
 ## 2. Create `/vite.config.ts`.
@@ -27,7 +29,21 @@ export default defineConfig({
 @import "tailwindcss";
 ```
 
-## 4. Run the project.
+## 4. Add Biome scripts to `/package.json`.
+```json
+{
+  ...
+  "scripts": {
+    ...
+    "format": "pnpm biome format --write",
+    "lint": "pnpm biome check",
+    "fix": "pnpm biome check --apply"
+  }
+  ...
+}
+```
+
+## 5. Run the project.
 ```sh
 pnpm run dev
 ```
