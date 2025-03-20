@@ -1,7 +1,8 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import viteLogo from "/vite.svg";
-import litLogo from "./assets/lit.svg";
+import BaseStyles from "../BaseStyles";
+import litLogo from "../assets/lit.svg";
 
 /**
  * An example element.
@@ -35,7 +36,7 @@ export class MyElement extends LitElement {
       </div>
       <slot></slot>
       <div class="card">
-        <button @click=${this._onClick} part="button">
+        <button @click=${this._onClick} part="button" class="bg-emerald-500 hover:bg-sky-700">
           count is ${this.count}
         </button>
       </div>
@@ -47,12 +48,20 @@ export class MyElement extends LitElement {
 		this.count++;
 	}
 
-	static styles = css`
+	static styles = [
+		BaseStyles,
+		css`
+    
     :host {
       max-width: 1280px;
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
+
+      & > div {
+        display: flex;
+        justify-content: center;
+      }
     }
 
     .logo {
@@ -87,7 +96,7 @@ export class MyElement extends LitElement {
       text-decoration: inherit;
     }
     a:hover {
-      color: #535bf2;
+      color: #53f2c8;
     }
 
     button {
@@ -97,12 +106,11 @@ export class MyElement extends LitElement {
       font-size: 1em;
       font-weight: 500;
       font-family: inherit;
-      background-color: #1a1a1a;
       cursor: pointer;
       transition: border-color 0.25s;
     }
     button:hover {
-      border-color: #646cff;
+      border-color: #53f2c8;
     }
     button:focus,
     button:focus-visible {
@@ -113,11 +121,9 @@ export class MyElement extends LitElement {
       a:hover {
         color: #747bff;
       }
-      button {
-        background-color: #f9f9f9;
-      }
     }
-  `;
+  `,
+	];
 }
 
 declare global {
